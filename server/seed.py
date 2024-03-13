@@ -2,11 +2,12 @@
 from random import randint
 
 # Remote library imports
-from config import app, db, bcrypt
+from app import app, db
+from config import bcrypt
 from models import Course, Lesson, Student, Instructor
 
 # Local imports
-from app import get_or_create_category
+# from app import get_or_create_category
 
 courses_data = [
     {
