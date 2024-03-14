@@ -1,17 +1,20 @@
 import React from "react";
 import aboutImg from "../assets/about-us.png";
 import CountUp from "react-countup";
-import "../index.css";
+//import "../index.css";
 
 const AboutUs = () => {
   return (
     <section className="about">
       <div className="about__content">
-        <h2>About Us</h2>
+        <h2 style={{ fontSize: '75px' }} >About Us</h2>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi
-          cupiditate animi deserunt libero nesciunt corporis explicabo nobis
-          ex quo molestiae!
+          Code Camp is a virtual coding institute dedicated to empowering students
+          and individuals to transition careers by offering affordable courses in various
+          programming languages. Through flexible online learning environments, it equips
+          learners with the skills and knowledge needed to succeed in the tech industry,
+          fostering career advancement opportunities!
+          
         </p>
 
         <div className="about__counter">
