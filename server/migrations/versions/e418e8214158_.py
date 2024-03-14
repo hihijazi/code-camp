@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 587d13d03fa8
+Revision ID: e418e8214158
 Revises: 
-Create Date: 2024-03-13 21:10:11.860061
+Create Date: 2024-03-14 13:36:42.234524
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '587d13d03fa8'
+revision = 'e418e8214158'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,14 +37,14 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('price', sa.Integer(), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
-    sa.Column('imageAlt', sa.String(), nullable=True),
-    sa.Column('image_url', sa.String(), nullable=True),
     sa.Column('instructor_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['instructor_id'], ['instructors.id'], name=op.f('fk_courses_instructor_id_instructors')),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('enrollments',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(), nullable=True),
+    sa.Column('description', sa.String(), nullable=True),
     sa.Column('student_id', sa.Integer(), nullable=True),
     sa.Column('course_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['course_id'], ['courses.id'], name=op.f('fk_enrollments_course_id_courses')),
@@ -56,7 +56,6 @@ def upgrade():
     sa.Column('title', sa.String(), nullable=True),
     sa.Column('content', sa.String(), nullable=True),
     sa.Column('course_id', sa.Integer(), nullable=False),
-    sa.Column('course_name', sa.String(), nullable=True),
     sa.ForeignKeyConstraint(['course_id'], ['courses.id'], name=op.f('fk_lessons_course_id_courses')),
     sa.PrimaryKeyConstraint('id')
     )
