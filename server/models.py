@@ -72,8 +72,9 @@ class Course(db.Model, SerializerMixin):
     name = db.Column(db.String)
     price = db.Column(db.Integer)
     description = db.Column(db.String)
+    instructor_id = db.Column(db.Integer, ForeignKey('instructors.id'))
     imageAlt = db.Column(db.String)
-    image_url = db.Column(String)
+    image_url = db.Column(db.String)
 
     # Add relationship 
     #lessons = relationship('Lesson', backref='course', lazy=True)
@@ -142,7 +143,6 @@ class Lesson(db.Model, SerializerMixin):
     title = db.Column(db.String) 
     content = db.Column(db.String)
     course_id = db.Column(db.Integer, ForeignKey('courses.id'), nullable=False)
-    course_name = db.Column(db.String)
 
     # Add relationship 
 
@@ -164,6 +164,8 @@ class Enrollment(db.Model):
     __tablename__ = 'enrollments'
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    description = db.Column(db.String)  
     student_id = db.Column(db.Integer, ForeignKey('students.id'))
     course_id = db.Column(db.Integer, ForeignKey('courses.id'))
 
