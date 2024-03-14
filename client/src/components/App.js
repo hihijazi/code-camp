@@ -1,7 +1,7 @@
 // App.js
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AboutUs from './AboutUs';
 import ChatBot from './ChatBot';
 import ChooseUs from './ChooseUs';
@@ -17,7 +17,7 @@ import Signup from './Signup';
 import StudentLogout from './StudentLogout';
 import Testimonials from './Testimonials';
 import Transaction from './Transaction';
-import TransactionDetail from './TransactionDetail';
+import TransactionDetails from './TransactionDetails';
 import Enrollment from './Enrollment';
 import Features from './Features';
 import Company from './Company';
@@ -26,63 +26,28 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/about-us">
-          <AboutUs />
-        </Route>
-        <Route path="/chat-bot">
-          <ChatBot />
-        </Route>
-        <Route path="/choose-us">
-          <ChooseUs />
-        </Route>
-        <Route path="/courses">
-          <Courses />
-        </Route>
-        <Route path="/instructor-login">
-          <InstructorLogin />
-        </Route>
-        <Route path="/student-login">
-          <StudentLogin />
-        </Route>
-        <Route path="/free-courses">
-          <FreeCourses />
-        </Route>
-        <Route path="/instructor-logout">
-          <InstructorLogout />
-        </Route>
-        <Route path="/signup">
-          <Signup />
-        </Route>
-        <Route path="/student-logout">
-          <StudentLogout />
-        </Route>
-        <Route path="/testimonials">
-          <Testimonials />
-        </Route>
-        <Route path="/transaction">
-          <Transaction />
-        </Route>
-        <Route path="/transaction-detail">
-          <TransactionDetail />
-        </Route>
-        <Route path="/enrollment">
-          <Enrollment />
-        </Route>
-        <Route path="/features">
-          <Features />
-        </Route>
-        <Route path="/company">
-          <Company />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/chat-bot" element={<ChatBot />} />
+        <Route path="/choose-us" element={<ChooseUs />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/instructor-login" element={<InstructorLogin />} />
+        <Route path="/student-login" element={<StudentLogin />} />
+        <Route path="/free-courses" element={<FreeCourses />} />
+        <Route path="/instructor-logout" element={<InstructorLogout />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/student-logout" element={<StudentLogout />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/transaction" element={<Transaction />} />
+        <Route path="/transaction-details" element={<TransactionDetails />} />
+        <Route path="/enrollment" element={<Enrollment />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/company" element={<Company />} />
+      </Routes>
       <Footer />
     </Router>
   );
 }
 
 export default App;
-
