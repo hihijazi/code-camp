@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, make_response, session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
-from models import db, Course, Lesson, Student, Instructor
+from models import db, Course, Lesson, Student, Instructor, Enrollment
 import os
 import requests
 from flask_cors import CORS
@@ -32,7 +32,7 @@ def index():
 
 class Courses(Resource):
     def get(self):
-        courses = [Course.to_dict() for courses in Course.query.all()]
+        courses = [Course.to_dict() for course in Course.query.all()]
         return make_response(courses, 200)
 
     def post(self):
@@ -205,6 +205,11 @@ class StudentsById(Resource):
 
 api.add_resource(StudentsById, '/students/<int:id>')
 
+
+class Enrollments(Resource):
+    def get(self):
+        enrollments = [Enrollment.to_dict() for enrollment in Enrollment.query.all()]
+        return make_response(enrollments, 200)
 
 # authentification
 class StudentCheckSession(Resource):

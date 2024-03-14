@@ -64,13 +64,13 @@ lessons_data = [
 ]
 
 students_data = [
-    {"name": "John Doe", "username": "johndoe", "password": bcrypt.generate_password_hash("password").decode('utf-8')},
-    {"name": "Jane Smith", "username": "janesmith", "password": bcrypt.generate_password_hash("password").decode('utf-8')}
+    {"name": "John Doe", "username": "johndoe", "_password_hash": bcrypt.generate_password_hash("_password_hash").decode('utf-8')},
+    {"name": "Jane Smith", "username": "janesmith", "_password_hash": bcrypt.generate_password_hash("_password_hash").decode('utf-8')}
 ]
 
 instructors_data = [
-    {"name": "Alice Johnson", "username": "alicej", "password": bcrypt.generate_password_hash("password").decode('utf-8')},
-    {"name": "Bob Anderson", "username": "boba", "password": bcrypt.generate_password_hash("password").decode('utf-8')}
+    {"name": "Alice Johnson", "username": "alicej", "_password_hash": bcrypt.generate_password_hash("_password_hash").decode('utf-8')},
+    {"name": "Bob Anderson", "username": "boba", "_password_hash": bcrypt.generate_password_hash("_password_hash").decode('utf-8')}
 ]
 
 if __name__ == "__main__":
