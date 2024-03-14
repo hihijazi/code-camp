@@ -9,11 +9,14 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-# Definition of many-to-many relationship
+
+# Define the many-to-many relationship table
 enrollments = Table('enrollments', db.Model.metadata,
+    Column('student_id', Integer, ForeignKey('students.id')),
     Column('course_id', Integer, ForeignKey('courses.id')),
-    Column('student_id', Integer, ForeignKey('students.id'))
+    extend_existing=True
 )
+db.Model.metadata.clear()
 
 # Models
 class Student(db.Model, SerializerMixin):
@@ -25,7 +28,7 @@ class Student(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
     
     # Add relationship
-    courses = relationship('Course', secondary=enrollments, backref='students')
+    courses = relationship('Course', secondary=enrollments, backref='enrolled_students')
 
     # Add foreign key
 
@@ -60,30 +63,27 @@ class Student(db.Model, SerializerMixin):
     
     def __repr__(self):
         return f'<Student {self.id}: {self.name} >'
-    
+
 
 class Course(db.Model, SerializerMixin):
     __tablename__ = 'courses'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    price = db.Column(db.Float)
+    price = db.Column(db.Integer)
     description = db.Column(db.String)
     imageAlt = db.Column(db.String)
+    image_url = db.Column(String)
 
     # Add relationship 
     #lessons = relationship('Lesson', backref='course', lazy=True)
-    students = relationship('Student', secondary=enrollments, backref='courses')
-
+    students = relationship('Student', secondary=enrollments, backref='enrolled_courses')
+    instructor_id = Column(Integer, ForeignKey('instructors.id'))
+    instructor = db.relationship("Instructor", back_populates="courses")
     # Add serialization rules
     serialize_rules = ('-students')
 
     # Add validations
-
-    @validates('price')
-    def validate_price(self, key, value):
-        if not 1 <= value <= 1000:
-            raise ValueError('Price must be between 1 and 1000')
 
     def __repr__(self):
         return f'<Course {self.id}: {self.name}: {self.price}>'
@@ -98,7 +98,7 @@ class Instructor(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
     
     # Add relationship
-    courses = relationship('Course', backref='instructor', lazy=True)
+    courses = db.relationship("Course", back_populates="instructor")
 
     # Add foreign key
 
