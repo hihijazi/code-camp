@@ -1,0 +1,30 @@
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+  }
+  
+  .about__content {
+    flex: 1;
+  }
+  
+  .about__counter {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .counter-item {
+    margin-right: 20px;
+  }
+  
+  .about__img {
+    flex: 1;
+  }
+  
+  .about__img--image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  
