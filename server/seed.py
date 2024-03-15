@@ -4,7 +4,7 @@ from random import randint
 # Remote library imports
 from app import app, db
 from config import bcrypt
-from models import Course, Lesson, Student, Instructor
+from models import Course, Lesson, Enrollment, Student, Instructor
 
 # Local imports
 # from app import get_or_create_category
@@ -109,6 +109,39 @@ lessons_data = [
     }
 ]
 
+enrollments_data = [
+    {
+        "id": "1",
+        "course_id": "1",
+        "student_id": "1",
+    },
+    {
+        "id": "2",
+        "course_id": "1",
+        "student_id": "5",
+    },
+    {
+        "id": "3",
+        "course_id": "1",
+        "student_id": "8",
+    },
+    {
+        "id": "4",
+        "course_id": "2",
+        "student_id": "9",
+    },
+    {
+        "id": "5",
+        "course_id": "2",
+        "student_id": "10",
+    },
+    {
+        "id": "6",
+        "course_id": "3",
+        "student_id": "2",
+    }
+]
+
 students_data = [
     {"name": "John Doe", "username": "johndoe", "_password_hash": bcrypt.generate_password_hash("_password_hash").decode('utf-8')},
     {"name": "Jane Smith", "username": "janesmith", "_password_hash": bcrypt.generate_password_hash("_password_hash").decode('utf-8')},
@@ -149,6 +182,11 @@ if __name__ == "__main__":
             lesson_data["course_id"] = course.id
             lesson = Lesson(**lesson_data)
             db.session.add(lesson)
+        
+        # Add enrollments
+        for enrollment_item in enrollments_data:
+            enrollment = Enrollment(**enrollment_item)
+            db.session.add(enrollment)
 
         # Add students
         for student_data in students_data:

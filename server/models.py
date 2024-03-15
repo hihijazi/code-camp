@@ -28,7 +28,8 @@ class Student(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
     
     # Add relationship
-    courses = relationship('Course', secondary=enrollments, backref='enrolled_students')
+    courses = relationship('Course', secondary=enrollments, backref='enrolled_students', overlaps="enrolled_students")
+
 
     # Add foreign key
 
@@ -77,8 +78,9 @@ class Course(db.Model, SerializerMixin):
     image_url = db.Column(db.String)
 
     # Add relationship 
-    #lessons = relationship('Lesson', backref='course', lazy=True)
-    students = relationship('Student', secondary=enrollments, backref='enrolled_courses')
+    
+    students = relationship('Student', secondary=enrollments, backref='enrolled_courses', overlaps="courses")
+
     instructor_id = Column(Integer, ForeignKey('instructors.id'))
     instructor = db.relationship("Instructor", back_populates="courses")
     # Add serialization rules
@@ -163,11 +165,9 @@ class Lesson(db.Model, SerializerMixin):
 class Enrollment(db.Model):
     __tablename__ = 'enrollments'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    description = db.Column(db.String)  
-    student_id = db.Column(db.Integer, ForeignKey('students.id'))
+    id = db.Column(db.Integer, primary_key=True) 
     course_id = db.Column(db.Integer, ForeignKey('courses.id'))
+    student_id = db.Column(db.Integer, ForeignKey('students.id'))
 
     # Define relationship with Course
     course = relationship("Course", backref="enrollments")
