@@ -1,7 +1,9 @@
 
-
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
+import "./courses.css";
+
+
 
 const Courses = () => {
  const [courses, setCourses] = useState([]);
