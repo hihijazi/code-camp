@@ -5,18 +5,6 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from config import db, bcrypt
 import re
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
-
-
-# Define the many-to-many relationship table
-enrollments = Table('enrollments', db.Model.metadata,
-    Column('student_id', Integer, ForeignKey('students.id')),
-    Column('course_id', Integer, ForeignKey('courses.id')),
-    extend_existing=True
-)
-db.Model.metadata.clear()
 
 # Models
 class Student(db.Model, SerializerMixin):
@@ -28,11 +16,8 @@ class Student(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
     
     # Add relationship
-    courses = relationship('Course', secondary=enrollments, backref='enrolled_students', overlaps="enrolled_students")
-
-
+    enrollments = relationship('Enrollment', back_populates='student')
     # Add foreign key
-
 
     # Add serialization rules
     serialize_rules = ('-courses',)
@@ -73,18 +58,17 @@ class Course(db.Model, SerializerMixin):
     name = db.Column(db.String)
     price = db.Column(db.Integer)
     description = db.Column(db.String)
-    instructor_id = db.Column(db.Integer, ForeignKey('instructors.id'))
     imageAlt = db.Column(db.String)
     image_url = db.Column(db.String)
+    instructor_id = db.Column(db.Integer, ForeignKey('instructors.id'))
 
     # Add relationship 
-    
-    students = relationship('Student', secondary=enrollments, backref='enrolled_courses', overlaps="courses")
 
-    instructor_id = Column(Integer, ForeignKey('instructors.id'))
-    instructor = db.relationship("Instructor", back_populates="courses")
+    instructor = relationship("Instructor", back_populates="courses")
+    enrollments = relationship('Enrollment', back_populates='course')
+    
     # Add serialization rules
-    serialize_rules = ('-students')
+    serialize_rules = ('-students', '-instructor')
 
     # Add validations
 
@@ -166,12 +150,15 @@ class Enrollment(db.Model):
     __tablename__ = 'enrollments'
 
     id = db.Column(db.Integer, primary_key=True) 
+    name = db.Column(db.String)
+    description = db.Column(db.String)  
     course_id = db.Column(db.Integer, ForeignKey('courses.id'))
     student_id = db.Column(db.Integer, ForeignKey('students.id'))
 
     # Define relationship with Course
-    course = relationship("Course", backref="enrollments")
-    student = relationship("Student", backref="enrollments")
+    student = relationship("Student", back_populates="enrollments")
+    course = relationship("Course", back_populates="enrollments")
+
 
     def __repr__(self):
         return f'<Enrollment {self.id}: Student {self.student_id} enrolled in Course {self.course_id}>'
