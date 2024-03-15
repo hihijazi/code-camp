@@ -4,10 +4,10 @@ import { Container, Row, Col } from "reactstrap";
 import chooseImg from "../../assets/why-choose-us.png";
 import "./choose-us.css";
 
-import ReactPlayer from "react-player";
+
 
 const ChooseUs = () => {
-  const [showVideo, setShowVideo] = useState(false);
+ 
   return (
     <section>
       <Container>
@@ -33,25 +33,9 @@ const ChooseUs = () => {
 
           <Col lg="6" md="6">
             <div className="choose__img">
-              {showVideo ? (
-                <ReactPlayer
-                  url="https://www.youtube.com/watch?v=ntNrecYUCfk"
-                  controls
-                  width="100%"
-                  height="350px"
-                />
-              ) : (
+              {
                 <img src={chooseImg} alt="" className="w-100" />
-              )}
-
-              {!showVideo && (
-                <span className="play__icon">
-                  <i
-                    className="ri-play-circle-line"
-                    onClick={() => setShowVideo(!showVideo)}
-                  ></i>
-                </span>
-              )}
+              }
             </div>
           </Col>
         </Row>
