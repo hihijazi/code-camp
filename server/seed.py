@@ -4,7 +4,7 @@ from random import randint
 # Remote library imports
 from app import app, db
 from config import bcrypt
-from models import Course, Lesson, Enrollment, Student, Instructor
+from models import Course, Lesson, Student, Instructor
 
 # Local imports
 # from app import get_or_create_category
@@ -109,38 +109,32 @@ lessons_data = [
     }
 ]
 
-enrollments_data = [
-    {
-        "id": "1",
-        "course_id": "1",
-        "student_id": "1",
-    },
-    {
-        "id": "2",
-        "course_id": "1",
-        "student_id": "5",
-    },
-    {
-        "id": "3",
-        "course_id": "1",
-        "student_id": "8",
-    },
-    {
-        "id": "4",
-        "course_id": "2",
-        "student_id": "9",
-    },
-    {
-        "id": "5",
-        "course_id": "2",
-        "student_id": "10",
-    },
-    {
-        "id": "6",
-        "course_id": "3",
-        "student_id": "2",
-    }
-]
+# enrollments_data = [
+#     {
+#         "course_id": "1",
+#         student_id = student.id,
+#     },
+#     {
+#         "course_id": "1",
+#         "student_id": "5",
+#     },
+#     {
+#         "course_id": "1",
+#         "student_id": "8",
+#     },
+#     {
+#         "course_id": "2",
+#         "student_id": "9",
+#     },
+#     {
+#         "course_id": "2",
+#         "student_id": "10",
+#     },
+#     {
+#         "course_id": "3",
+#         "student_id": "2",
+#     }
+# ]
 
 students_data = [
     {"name": "John Doe", "username": "johndoe", "_password_hash": bcrypt.generate_password_hash("_password_hash").decode('utf-8')},
@@ -165,17 +159,21 @@ instructors_data = [
 
 if __name__ == "__main__":
     with app.app_context():
+        print("Deleting data...")
         Course.query.delete()
         Lesson.query.delete()
         Student.query.delete()
         Instructor.query.delete()
+        db.session.commit()
 
         # Add courses
+        print("Creating courses...")
         for course_data in courses_data:
             course = Course(**course_data)
             db.session.add(course)
 
         # Add lessons
+        print("Creating lessons...")
         for lesson_data in lessons_data:
             course_name = lesson_data.pop("course_name")
             course = Course.query.filter_by(name=course_name).first()
@@ -184,16 +182,20 @@ if __name__ == "__main__":
             db.session.add(lesson)
         
         # Add enrollments
-        for enrollment_item in enrollments_data:
-            enrollment = Enrollment(**enrollment_item)
-            db.session.add(enrollment)
+        # student = Student.query.filter_by(name='John Doe').first()
+        # course = Course.query.filter_by(name='Python').first()
+        # enrollment = Enrollment(student.id, course.id)
+        # db.session.add(enrollment)
+
 
         # Add students
+        print("Creating students...")
         for student_data in students_data:
             student = Student(**student_data)
             db.session.add(student)
 
         # Add instructors
+        print("Creating instructors...")
         for instructor_data in instructors_data:
             instructor = Instructor(**instructor_data)
             db.session.add(instructor)
