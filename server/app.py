@@ -17,7 +17,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 
-cors = CORS(app)
+CORS(app)
 
 migrate = Migrate(app, db)
 
@@ -32,7 +32,7 @@ def index():
 
 class Courses(Resource):
     def get(self):
-        courses = [Course.to_dict() for course in Course.query.all()]
+        courses = [course.to_dict() for course in Course.query.all()]
         return make_response(courses, 200)
 
     def post(self):
@@ -44,6 +44,7 @@ class Courses(Resource):
             )
             db.session.add(new_course)
             db.session.commit()
+            
             return make_response(new_course.to_dict(rules=('-lessons',)), 201)
         except ValueError:
             return make_response({
@@ -92,7 +93,7 @@ api.add_resource(CoursesById, '/courses/<int:id>')
 
 class Lessons(Resource):
     def get(self):
-        lesson = [Lessons.to_dict() for lesson in Lesson.query.all()]
+        lesson = [lesson.to_dict() for lesson in Lesson.query.all()]
         return make_response(lesson, 200)
 
     def post(self):

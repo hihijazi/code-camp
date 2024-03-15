@@ -7,7 +7,7 @@ const AboutUs = () => {
   return (
     <section className="about">
       <div className="about__content">
-        <h2 style={{ fontSize: '75px' }} >About Us</h2>
+        <h2 style={{ fontSize: '45px' }} >About Us</h2>
         <p>
           Code Camp is a virtual coding institute dedicated to empowering students
           and individuals to transition careers by offering affordable courses in various
