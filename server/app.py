@@ -17,11 +17,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 
-<<<<<<< HEAD
-CORS(app)
-=======
+
 cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
->>>>>>> 0495886ebbb173ee6d1fcf5676a0b05122cdc6f3
 
 migrate = Migrate(app, db)
 
