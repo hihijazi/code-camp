@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 
-import courseImg01 from "../../assets/web-development.png";
-import courseImg02 from "../../assets/kids-learning.png";
-import courseImg03 from "../../assets/seo.png";
-import courseImg04 from "../../assets/ui-ux.png";
+import courseImg11 from "../../assets/web-development.png";
+import courseImg12 from "../../assets/kids-learning.png";
+import courseImg13 from "../../assets/seo.png";
+import courseImg14 from "../../assets/ui-ux.png";
 import FreeCourseCard from "./FreeCourseCard";
 
 import "./free-course.css";
@@ -13,14 +13,14 @@ const freeCourseData = [
   {
     id: "01",
     title: "Basic Web Development Course",
-    imgUrl: courseImg01,
+    imgUrl: courseImg11,
     students: "Enrollments 5.2",
     rating: "Rating 1.7",
   },
   {
     id: "02",
     title: "Coding for Junior Basic Course",
-    imgUrl: courseImg02,
+    imgUrl: courseImg12,
     students: "Enrollments 2.3",
     rating: "Rating 1.3",
   },
@@ -28,7 +28,7 @@ const freeCourseData = [
   {
     id: "03",
     title: "Search Engine Optimization - Basic",
-    imgUrl: courseImg03,
+    imgUrl: courseImg13,
     students: "Enrollments 2.4",
     rating: "Rating 1.1",
   },
@@ -36,7 +36,7 @@ const freeCourseData = [
   {
     id: "04",
     title: "Basic UI/UX Design - Figma",
-    imgUrl: courseImg04,
+    imgUrl: courseImg14,
     students: "Enrollments 4.2",
     rating: "Rating 1.6",
   },
