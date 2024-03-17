@@ -17,7 +17,11 @@ app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 
+<<<<<<< HEAD
 CORS(app)
+=======
+cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+>>>>>>> 0495886ebbb173ee6d1fcf5676a0b05122cdc6f3
 
 migrate = Migrate(app, db)
 
@@ -209,7 +213,7 @@ api.add_resource(StudentsById, '/students/<int:id>')
 
 class Enrollments(Resource):
     def get(self):
-        enrollments = [Enrollment.to_dict() for enrollment in Enrollment.query.all()]
+        enrollments = [enrollment.to_dict() for enrollment in Enrollment.query.all()]
         return make_response(enrollments, 200)
 
 # authentification
