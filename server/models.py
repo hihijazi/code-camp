@@ -62,16 +62,9 @@ class Course(db.Model, SerializerMixin):
     instructor_id = db.Column(db.Integer, ForeignKey('instructors.id'))
 
     # Add relationship 
-<<<<<<< HEAD
-    #lessons = relationship('Lesson', backref='course', lazy=True)
-    students = relationship('Student', secondary=enrollments, backref='enrolled_courses')
-    instructor_id = Column(Integer, ForeignKey('instructors.id'))
-    instructor = db.relationship("Instructor", back_populates="courses")
-=======
 
     instructor = relationship("Instructor", back_populates="courses")
     enrollments = relationship('Enrollment', back_populates='course')
->>>>>>> 0495886ebbb173ee6d1fcf5676a0b05122cdc6f3
     
     # Add serialization rules
     serialize_rules = ('-students', '-instructor')
