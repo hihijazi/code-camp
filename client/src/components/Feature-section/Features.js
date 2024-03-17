@@ -5,19 +5,19 @@ import "./features.css";
 const FeatureData = [
   {
     title: "Quick Learning",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum molestias, aperiam doloribus aut sapiente praesentium eos iste dicta amet itaque!",
+    desc: "At Code Camp, we prioritize quick learning with our concise and focused coding courses. Our short courses are designed to efficiently impart essential coding skills, allowing students to progress rapidly in their journey towards mastering web development.",
     icon: "ri-draft-line",
   },
 
   {
     title: "All Time Support",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum molestias, aperiam doloribus aut sapiente praesentium eos iste dicta amet itaque!",
+    desc: "Code Camp ensures 24/7 support for its students, guaranteeing assistance whenever they encounter challenges or have questions. Our dedicated support team is readily available to provide guidance and address any inquiries, ensuring learners receive continuous help throughout their coding journey!",
     icon: "ri-discuss-line",
   },
 
   {
     title: "Certification",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum molestias, aperiam doloribus aut sapiente praesentium eos iste dicta amet itaque!",
+    desc: "Upon completing any courses at Code Camp, students receive certifications detailing the course completed along with the total number of hours dedicated to learning. These certifications serve as valuable credentials, validating the skills and knowledge acquired, and enhancing the professional credibility of our graduates.",
     icon: "ri-contacts-book-line",
   },
 ];

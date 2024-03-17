@@ -1,4 +1,4 @@
-.single__course__item {
+/* .single__course__item {
     padding: 15px;
   }
   
@@ -34,5 +34,22 @@
   
   .course__top__left h2 {
     font-weight: 600;
-  }
-  
+  } */
+
+.conatiner
+{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding: 10px 20 px;
+}
+
+.conatiner .box
+{
+  width: 350px;
+  height: 400px; 
+  overflow: hidden; 
+  margin-top: 20px; 
+}

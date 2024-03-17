@@ -39,9 +39,9 @@ const Header = () => {
       <Container>
         <div className="navigation d-flex align-items-center justify-content-between">
           <div className="logo">
-            <h2 className="d-flex align-items-center gap-1" style={{ fontSize: '25px', display: 'flex', alignItems: 'center' }} >
+            <h2 className="d-flex align-items-center gap-1" style={{ fontSize: '45px', display: 'flex', alignItems: 'center' }} >
               <i className="ri-pantone-line"></i> 
-              <span style={{ fontWeight: 'bold', color: 'Plum' }}>Code Camp</span>
+              <span style={{ fontWeight: 'bold', color: 'Teal' }}>Code Camp</span>
               <ul className="nav__list" style={{ display: 'flex', gap: '20px', listStyle: 'none', marginLeft: '20px' }}>
                 {navLinks.map((item, index) => (
                   <li key={index} className="nav__item">

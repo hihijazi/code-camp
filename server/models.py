@@ -58,8 +58,7 @@ class Course(db.Model, SerializerMixin):
     name = db.Column(db.String)
     price = db.Column(db.Integer)
     description = db.Column(db.String)
-    imageAlt = db.Column(db.String)
-    image_url = db.Column(db.String)
+    image = db.Column(db.String)
     instructor_id = db.Column(db.Integer, ForeignKey('instructors.id'))
 
     # Add relationship 

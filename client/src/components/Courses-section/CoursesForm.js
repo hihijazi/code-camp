@@ -46,7 +46,7 @@ function CoursesForm({ courseId, onAddCourse }) {
           {detail ? (
             <div className='detail_content'>
               <div key={detail.id}>
-                <h2>{detail.Title}</h2> 
+                <h2>{detail.name}</h2> 
                 <h3>{detail.Description}</h3> 
                 <p>{detail.price}</p> 
                 <button>Enroll</button>
@@ -57,12 +57,12 @@ function CoursesForm({ courseId, onAddCourse }) {
               {courses.map(course => (
                 <div key={course.id} className='content'>
                   <div className='img-box'>
-                    <img src={course.image} alt={course.Title} />
+                    <img src={course.image} alt={course.name}/> 
                   </div>
                   <div className='detail'>
                     <div className='info'>
-                      <h3>{course.Title}</h3> 
-                      <p>{course.Description}</p> 
+                      <h3>{course.name}</h3>
+                      <p>{course.description}</p> 
                       <p>{course.price}</p> 
                     </div>
                     <button onClick={() => setDetail(course)}>View Details</button>
@@ -78,5 +78,3 @@ function CoursesForm({ courseId, onAddCourse }) {
 };
 
 export default CoursesForm;
-
-
