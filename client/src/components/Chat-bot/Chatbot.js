@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useChat } from "./ChatContext";
-import "./Chatbot.css";
+import "./chatbot.css";
 
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {

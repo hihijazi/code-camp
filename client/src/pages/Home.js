@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Header from "../components/Header/Header";
 import HeroSection from "../components/Hero-Section/HeroSection";
+import Chatbot from "../components/Chat-bot/Chatbot"; 
 
 import AboutUs from "../components/About-us/AboutUs";
 // import Courses from "../components/Courses-section/CoursesForm";
