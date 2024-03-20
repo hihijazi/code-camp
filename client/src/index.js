@@ -5,6 +5,9 @@ import App from './App'
 import './index.css';
 import CoursesForm from './components/Courses-section/CoursesForm';
 import Chatbot from './components/Chat-bot/Chatbot';
+import { ChatProvider } from './components/Chat-bot/ChatContext';
+
+
 
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -20,7 +23,8 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/courses" element={<CoursesForm />} />
-        <Route path="/chat-bot" element={<Chatbot/>} />
+        <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/chat" element={<ChatProvider />} />
       </Routes>
     </Router>
   </React.StrictMode>
