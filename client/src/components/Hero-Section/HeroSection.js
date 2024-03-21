@@ -19,10 +19,6 @@ const HeroSection = () => {
                 goals and desires!
               </p>
             </div>
-            <div className="search">
-              <input type="text" placeholder="Search" />
-              <button className="btn">Search</button>
-            </div>
           </Col>
 
           <Col lg="6" md="6">
