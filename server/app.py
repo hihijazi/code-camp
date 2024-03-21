@@ -17,6 +17,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 
+
 cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
 migrate = Migrate(app, db)
@@ -44,6 +45,7 @@ class Courses(Resource):
             )
             db.session.add(new_course)
             db.session.commit()
+            
             return make_response(new_course.to_dict(rules=('-lessons',)), 201)
         except ValueError:
             return make_response({
