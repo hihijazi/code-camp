@@ -9,7 +9,7 @@ const navLinks = [
   },
   {
     display: "About Us",
-    url: "/about-us",
+    url: "/",
   },
   {
     display: "Courses",

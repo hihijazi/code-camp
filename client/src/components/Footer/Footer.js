@@ -15,7 +15,7 @@ const footerQuickLinks = [
 
   {
     display: "Courses",
-    url: "#",
+    url: "/courses",
   },
 ];
 

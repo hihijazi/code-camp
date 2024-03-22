@@ -1,8 +1,8 @@
-"""empty message
+"""Added image to courses
 
-Revision ID: 673520fb4c35
+Revision ID: 6173e56cc81f
 Revises: 
-Create Date: 2024-03-16 21:46:05.977885
+Create Date: 2024-03-21 21:50:59.958967
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '673520fb4c35'
+revision = '6173e56cc81f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,7 +37,7 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('price', sa.Integer(), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
-    sa.Column('image_url', sa.String(), nullable=True),
+    sa.Column('image', sa.String(), nullable=True),
     sa.Column('instructor_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['instructor_id'], ['instructors.id'], name=op.f('fk_courses_instructor_id_instructors')),
     sa.PrimaryKeyConstraint('id')

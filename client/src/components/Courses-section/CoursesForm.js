@@ -55,17 +55,19 @@ function CoursesForm({ courseId, onAddCourse }) {
           ) : (
             <div className='box'>
               {courses.map(course => (
-                <div key={course.id} className='content'>
-                  <div className='img-box'>
-                    <img src={course.image} alt={course.name}/> 
-                  </div>
-                  <div className='detail'>
-                    <div className='info'>
-                      <h3>{course.name}</h3>
-                      <p>{course.description}</p> 
-                      <p>{course.price}</p> 
+                <div key={course.id} className='item'>  
+                  <div className='content'>
+                    <div className='img-box'>
+                      <img src={course.image} alt={course.name}/> 
                     </div>
-                    <button onClick={() => setDetail(course)}>View Details</button>
+                    <div className='detail'>
+                      <div className='info'>
+                        <h3>{course.name}</h3>
+                        <p>{course.description}</p> 
+                        <p>{course.price}</p> 
+                        <button onClick={() => setDetail(course)}>View Details</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
