@@ -9,7 +9,7 @@ const navLinks = [
   },
   {
     display: "About Us",
-    url: "/about-us",
+    url: "/",
   },
   {
     display: "Courses",
@@ -21,11 +21,11 @@ const navLinks = [
   },
   {
     display: "Instructor Login",
-    url: "#",
+    url: "/instructorlogin",
   },
   {
     display: "Student Login",
-    url: "#",
+    url: "/studentlogin",
   },
 ];
 
@@ -69,5 +69,7 @@ const Header = () => {
 };
 
 export default Header;
+
+
 
 

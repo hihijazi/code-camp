@@ -3,7 +3,6 @@ import Header from "../components/Header/Header";
 import HeroSection from "../components/Hero-Section/HeroSection";
 
 import AboutUs from "../components/About-us/AboutUs";
-import Courses from "../components/Courses-section/CoursesForm";
 import ChooseUs from "../components/Choose-us/ChooseUs";
 
 import Features from "../components/Feature-section/Features";
@@ -20,7 +19,6 @@ const Home = () => {
       <Header />
       <HeroSection />
       <AboutUs />
-      <Courses />
       <ChooseUs />
       <Features />
       <FreeCourse />
@@ -31,4 +29,3 @@ const Home = () => {
 };
 
 export default Home;
-

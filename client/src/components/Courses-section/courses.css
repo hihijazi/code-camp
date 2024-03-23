@@ -1,55 +1,60 @@
-/* .single__course__item {
-    padding: 15px;
-  }
-  
-  .course__img img {
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .enroll a {
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #17bf9e;
-  }
-  
-  .lesson,
-  .students,
-  .rating {
-    font-size: 0.9rem;
-    color: #0a2b1e;
-    font-weight: 500;
-  }
-  
-  .lesson i,
-  .students i,
-  .rating i {
-    font-weight: 400;
-  }
-  
-  .course__title {
-    line-height: 2rem;
-  }
-  
-  .course__top__left h2 {
-    font-weight: 600;
-  } */
-
-.conatiner
-{
-  width: 100%;
+.container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 30px;
-  padding: 10px 20 px;
+  padding: 20px;
 }
 
-.conatiner .box
-{
-  width: 350px;
-  height: 400px; 
-  overflow: hidden; 
-  margin-top: 20px; 
+.box {
+  flex: 0 0 32%;
+  max-width: 32%;
+  box-sizing: border-box;
+  margin-bottom: 1em;
+}
+
+.box .content {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
+
+.content .item {
+  flex: 0 0 calc(33.33% - 20px); 
+  margin: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: 20px; 
+  box-sizing: border-box; 
+  transition: 0.5s;
+}
+
+.item .img-box {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+}
+
+.item .info {
+  padding: 20px;
+  text-align: center;
+}
+
+.box:hover {
+  transform: translateY(-20px);
+}
+
+.item {
+  width: 100%;
+  height: auto;
+  padding: 0.5rem;
+  text-align: center;
+  object-fit: cover;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
