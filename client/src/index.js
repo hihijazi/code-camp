@@ -23,8 +23,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/courses" element={<CoursesForm />} />
-        <Route path="/chatbot" element={<Chatbot />} />
-          <Route path="/chat" element={<ChatProvider />} />
+        <Route path="/chat-bot" element={<Chatbot />} />
       </Routes>
     </Router>
   </React.StrictMode>
