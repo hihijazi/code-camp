@@ -1,4 +1,4 @@
-/* .container {
+.container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -57,4 +57,4 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
-} */
+}
