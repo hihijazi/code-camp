@@ -7,9 +7,6 @@ import CoursesForm from './components/Courses-section/CoursesForm';
 import Chatbot from './components/Chat-bot/Chatbot';
 import { ChatProvider } from './components/Chat-bot/ChatContext';
 
-
-
-
 import 'bootstrap/dist/css/bootstrap.css';
 // import 'remixicon/fonts/remixicon.css';
 import 'slick-carousel/slick/slick.css';
