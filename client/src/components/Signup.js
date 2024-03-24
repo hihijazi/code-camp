@@ -9,7 +9,9 @@ import Container from '@mui/material/Container';
 import { register } from './action.js';
 import _ from 'lodash';
 import { useNavigate, } from 'react-router-dom';
-function SignUp() {
+
+
+function Signup() {
    const navigate = useNavigate();
 
 
@@ -102,4 +104,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Signup;

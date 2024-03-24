@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { login } from './action.js';
+import { loginInstructor } from './action.js';
 import _ from 'lodash';
 import {useNavigate} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
@@ -28,7 +28,7 @@ function InstructorLogin() {
     };
 
     try {
-      const data = await login(postData);
+      const data = await loginInstructor(postData);
       const serializedData = JSON.stringify(data);
       localStorage.setItem("user", serializedData);
        toast.success("Login successfully!");
