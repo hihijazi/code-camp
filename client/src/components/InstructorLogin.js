@@ -54,7 +54,9 @@ function InstructorLogin() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Log in
+
+          Instructor Log in
+
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -86,7 +88,9 @@ function InstructorLogin() {
             Log In
           </Button>
           <Grid container>
-            <Link href="/signup" variant="p">
+
+            <Link href="/instructor-signup" variant="p">
+
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>

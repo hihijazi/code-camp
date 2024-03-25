@@ -27,12 +27,25 @@ export default function Chatbot() {
       sender: "user",
       direction: "outgoing",
     };
-    const newMessages = [...messages, newMessage];
-    setMessages(newMessages);
+  
+    // Update messages state with the new message
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+  
+    // Set typing state to true
     setTyping(true);
-    await processMessageToChatGPT(newMessages);
-    addMessage(newMessage);
+  
+    try {
+      // Process the message asynchronously
+      await processMessageToChatGPT(newMessage);
+  
+      // If successful, add the message to the chat
+      addMessage(newMessage);
+    } catch (error) {
+      // Handle errors, if any
+      console.error("Error processing message:", error);
+    }
   };
+  
 
   async function processMessageToChatGPT(chatMessages) {
     // Your existing code here
@@ -40,15 +53,10 @@ export default function Chatbot() {
 
   return (
     <div className="App">
-      <div className="modal" style={{ position: "fixed", right: 0, bottom: 0 }}>
+      <div style={{ position: "relative", height: "500px" }}>
         <MainContainer>
           <ChatContainer>
-            <MessageList
-              scrollBehavior="smooth"
-              typingIndicator={
-                typing ? <TypingIndicator content="ChatGPT is typing" /> : null
-              }
-            >
+            <MessageList>
               {messages.map((message, index) => (
                 <Message key={index} model={message} />
               ))}
@@ -60,4 +68,3 @@ export default function Chatbot() {
     </div>
   );
 }
-
