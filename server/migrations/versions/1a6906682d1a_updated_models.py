@@ -1,8 +1,8 @@
-"""Added image to courses
+"""updated models
 
-Revision ID: 6173e56cc81f
+Revision ID: 1a6906682d1a
 Revises: 
-Create Date: 2024-03-21 21:50:59.958967
+Create Date: 2024-03-25 14:09:02.783211
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6173e56cc81f'
+revision = '1a6906682d1a'
 down_revision = None
 branch_labels = None
 depends_on = None
