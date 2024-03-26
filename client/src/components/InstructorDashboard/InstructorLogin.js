@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { loginInstructor } from './action.js';
+import { loginInstructor } from '../action.js';
 import _ from 'lodash';
 import {useNavigate} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';

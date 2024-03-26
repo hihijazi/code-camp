@@ -69,6 +69,18 @@ class Course(db.Model, SerializerMixin):
     # Add serialization rules
     serialize_rules = ('-students', '-instructor')
 
+    @staticmethod
+    def get_all_courses():
+        return Course.query.all()
+
+    @staticmethod
+    def get_courses_by_instructor_id(instructor_id):
+        return Course.query.filter_by(instructor_id=instructor_id).all()
+
+    @staticmethod
+    def get_courses_by_student_id(student_id):
+        return Course.query.join(Enrollment).filter(Enrollment.student_id == student_id).all()
+
     # Add validations
 
     def __repr__(self):
@@ -161,4 +173,13 @@ class Enrollment(db.Model):
 
     def __repr__(self):
         return f'<Enrollment {self.id}: Student {self.student_id} enrolled in Course {self.course_id}>'
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'course_id': self.course_id,
+            'student_id': self.student_id,
+        }
         

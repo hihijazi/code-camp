@@ -1,4 +1,3 @@
-// ChatContext.js
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const ChatContext = createContext();
