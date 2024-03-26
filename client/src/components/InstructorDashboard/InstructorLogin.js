@@ -6,13 +6,13 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { loginStudent } from './action.js';
+import { loginInstructor } from '../action.js';
 import _ from 'lodash';
 import {useNavigate} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function StudentLogin() {
+function InstructorLogin() {
    const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,7 +28,7 @@ function StudentLogin() {
     };
 
     try {
-      const data = await loginStudent(postData);
+      const data = await loginInstructor(postData);
       const serializedData = JSON.stringify(data);
       localStorage.setItem("user", serializedData);
        toast.success("Login successfully!");
@@ -54,7 +54,7 @@ function StudentLogin() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Student Log in
+          Instructor Log in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -86,7 +86,7 @@ function StudentLogin() {
             Log In
           </Button>
           <Grid container>
-            <Link href="/student-signup" variant="p">
+            <Link href="/instructor-signup" variant="p">
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
@@ -98,4 +98,4 @@ function StudentLogin() {
   );
 }
 
-export default StudentLogin;
+export default InstructorLogin;

@@ -6,12 +6,12 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { studentRegister } from './action.js';
+import { instructorRegister } from '../action.js';
 import _ from 'lodash';
 import { useNavigate, } from 'react-router-dom';
 
 
-function StudentSignup() {
+function InstructorSignup() {
    const navigate = useNavigate();
 
 
@@ -30,9 +30,9 @@ function StudentSignup() {
     };
 
     try {
-      const data = await studentRegister(postData);
+      const data = await instructorRegister(postData);
       alert('Register successfully');
-      navigate('/login'); // Redirect to home page
+      navigate('/instructorlogin'); // Redirect to home page
     } catch (error) {
       alert('Oops! Something went wrong server throws error');
     }
@@ -94,7 +94,7 @@ function StudentSignup() {
             Register
           </Button>
           <Grid container>
-            <Link href="/login" variant="p">
+            <Link href="/instructorlogin" variant="p">
               {"Already have an account? Log In"}
             </Link>
           </Grid>
@@ -104,4 +104,4 @@ function StudentSignup() {
   );
 }
 
-export default StudentSignup;
+export default InstructorSignup;

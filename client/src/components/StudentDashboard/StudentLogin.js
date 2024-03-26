@@ -6,35 +6,36 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { instructorRegister } from './action.js';
+import { loginStudent } from '../action.js';
 import _ from 'lodash';
-import { useNavigate, } from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-function InstructorSignup() {
+function StudentLogin() {
    const navigate = useNavigate();
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const postData = {
-      name: data.get('name'),
       username: data.get('username'),
       password: data.get('password'),
     };
 
-    if (_.isEmpty(postData.name) || _.isEmpty(postData.username) || _.isEmpty(postData.password)) {
-      alert('Kindly fill all fields to register');
+    if (_.isEmpty(postData.username) || _.isEmpty(postData.password)) {
+      toast.error("Kindly fill both fields to login!");
       return;
     };
 
     try {
-      const data = await instructorRegister(postData);
-      alert('Register successfully');
-      navigate('/instructorlogin'); // Redirect to home page
+      const data = await loginStudent(postData);
+      const serializedData = JSON.stringify(data);
+      localStorage.setItem("user", serializedData);
+       toast.success("Login successfully!");
+      navigate('/home'); // Redirect to home page
+      window.location.reload(); // Reload the app
     } catch (error) {
-      alert('Oops! Something went wrong server throws error');
+         toast.error('Oops! Something went wrong server throws error');
     }
   };
 
@@ -53,19 +54,9 @@ function InstructorSignup() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign Up
+          Student Log in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="Full Name"
-            name="name"
-            autoComplete="name"
-            autoFocus
-          />
           <TextField
             margin="normal"
             required
@@ -74,6 +65,7 @@ function InstructorSignup() {
             label="User Name"
             name="username"
             autoComplete="email"
+            autoFocus
           />
           <TextField
             margin="normal"
@@ -91,17 +83,19 @@ function InstructorSignup() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Register
+            Log In
           </Button>
           <Grid container>
-            <Link href="/instructorlogin" variant="p">
-              {"Already have an account? Log In"}
+            <Link href="/student-signup" variant="p">
+              {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
         </Box>
       </Box>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }} />
     </Container>
+
   );
 }
 
-export default InstructorSignup;
+export default StudentLogin;
