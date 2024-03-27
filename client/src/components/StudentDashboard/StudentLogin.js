@@ -32,10 +32,15 @@ function StudentLogin() {
       const serializedData = JSON.stringify(data);
       localStorage.setItem("user", serializedData);
        toast.success("Login successfully!");
-      navigate('/home'); // Redirect to home page
+      navigate('/student-dashboard'); // Redirect to home page
       window.location.reload(); // Reload the app
-    } catch (error) {
-         toast.error('Oops! Something went wrong server throws error');
+    }catch (error) {
+      console.log(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error('Oops! Something went wrong server throws error');
+      }
     }
   };
 
@@ -54,9 +59,7 @@ function StudentLogin() {
         }}
       >
         <Typography component="h1" variant="h5">
-
           Student Log in
-
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -88,9 +91,7 @@ function StudentLogin() {
             Log In
           </Button>
           <Grid container>
-
             <Link href="/student-signup" variant="p">
-
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>

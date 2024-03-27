@@ -31,11 +31,17 @@ function InstructorLogin() {
       const data = await loginInstructor(postData);
       const serializedData = JSON.stringify(data);
       localStorage.setItem("user", serializedData);
-       toast.success("Login successfully!");
-      navigate('/home'); // Redirect to home page
+      toast.success("Login successfully!");
+      navigate('/instructor-dashboard'); // Redirect to home page
       window.location.reload(); // Reload the app
-    } catch (error) {
-         toast.error('Oops! Something went wrong server throws error');
+    }
+    catch (error) {
+      console.log(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error('Oops! Something went wrong server throws error');
+      }
     }
   };
 
@@ -54,9 +60,7 @@ function InstructorLogin() {
         }}
       >
         <Typography component="h1" variant="h5">
-
           Instructor Log in
-
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -88,9 +92,7 @@ function InstructorLogin() {
             Log In
           </Button>
           <Grid container>
-
             <Link href="/instructor-signup" variant="p">
-
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>

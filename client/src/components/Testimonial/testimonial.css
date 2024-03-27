@@ -1,4 +1,21 @@
 .testimonial__content h2 {
-    font-weight: 600;
-  }
-  
+  font-weight: 600;
+}
+
+.testimonial__content {
+  display: flex;
+  align-items: flex-start; /* Align items to the start of the flex container */
+}
+
+.testimonial__img {
+  margin-right: 20px; /* Adjust the margin between the image and text */
+}
+
+.testimonial__img img {
+  max-width: 500px;
+  max-height: 300px; /* Adjust the maximum width of the image as needed */
+}
+
+.testimonial__text {
+  flex: 1; /* Let the text take up the remaining space */
+}

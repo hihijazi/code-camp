@@ -9,9 +9,10 @@ import Container from '@mui/material/Container';
 import { studentRegister } from '../action.js';
 import _ from 'lodash';
 import { useNavigate, } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
-function StudentSignup() {
+function Signup() {
    const navigate = useNavigate();
 
 
@@ -31,10 +32,15 @@ function StudentSignup() {
 
     try {
       const data = await studentRegister(postData);
-      alert('Register successfully');
-      navigate('/login'); // Redirect to home page
-    } catch (error) {
-      alert('Oops! Something went wrong server throws error');
+      toast.success("Student Register successfully!");
+      navigate('/studentlogin'); // Redirect to home page
+    }catch (error) {
+      console.log(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error('Oops! Something went wrong server throws error');
+      }
     }
   };
 
@@ -53,7 +59,7 @@ function StudentSignup() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign Up
+          Student Sign Up
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -100,8 +106,9 @@ function StudentSignup() {
           </Grid>
         </Box>
       </Box>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }} />
     </Container>
   );
 }
 
-export default StudentSignup;
+export default Signup;

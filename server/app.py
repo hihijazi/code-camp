@@ -31,7 +31,7 @@ jwt = JWTManager(app)
 
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
-app.api_key = "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"
+app.api_key = "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"
 app.api_url = "https://api.openai.com/v1/chat/completions"
 
 migrate = Migrate(app, db)
@@ -81,7 +81,7 @@ class Courses(Resource):
                 'error': 'Validation Error'
             })
 
-api.add_resource(Courses, '/courses')
+api.add_resource(Courses, '/api/courses')
 
 
 class CoursesById(Resource):
@@ -207,8 +207,8 @@ class Instructors(Resource):
             db.session.add(user)
             db.session.commit()
             return make_response(user.to_dict(only=('id', 'name', 'username')), 201)
-        except ValueError:
-            return make_response({'error': 'Failed to add new user, try again!'}, 400)
+        except ValueError as e:
+            return make_response({'error': str(e)}, 400)
 
 
 class InstructorLogin(Resource):
@@ -216,11 +216,12 @@ class InstructorLogin(Resource):
         try:
             username = request.get_json()['username']
             password = request.get_json()['password']
-            instructor = Instructor.query.filter(Instructor.username == request.get_json()['username']).first()
+            instructor = Instructor.query.filter(Instructor.username == username).first()
             if instructor:
                 if instructor.authenticate(password):
                     data = instructor.to_dict(only=('id', 'name', 'username'))
                     data['access_token'] = create_access_token(identity=instructor.id)
+                    data['is_student'] = False
                     session['user_id'] = instructor.id
                     return data, 200
             return {'error': 'Invalid username or password'}, 401
@@ -305,8 +306,8 @@ class Students(Resource):
             db.session.add(user)
             db.session.commit()
             return make_response(user.to_dict(only=('id', 'name', 'username')), 201)
-        except ValueError:
-            return make_response({'error': 'Failed to add new user, try again!'}, 400)
+        except ValueError as e:
+            return make_response({'error': str(e)}, 400)
 
 
 class StudentLogin(Resource):
@@ -322,6 +323,7 @@ class StudentLogin(Resource):
                     access_token = create_access_token(identity=student.id)
                     data = student.to_dict(only=('id', 'name', 'username'))
                     data['access_token'] = access_token
+                    data['is_student'] = True 
                     return data, 200
             return {'error': 'Invalid username or password'}, 401
         except ValueError:
@@ -400,9 +402,9 @@ class StudentCourses(Resource):
     @jwt_required()
     def post(self):
         student_id = get_jwt_identity()
-        name = request.get_json()['name']
-        description = request.get_json()['description']
-        course_id = request.get_json()['course_id']
+        name = request.get_json().get('name')
+        description = request.get_json().get('description')
+        course_id = request.get_json().get('course_id')
         enrolment = Enrollment(
             name=name, description=description,
             course_id=course_id, student_id=student_id
@@ -410,7 +412,6 @@ class StudentCourses(Resource):
         db.session.add(enrolment)
         db.session.commit()
         return make_response(enrolment.to_dict(), 201)
-    
 
 
 api.add_resource(Students, '/students')
@@ -418,7 +419,7 @@ api.add_resource(StudentsById, '/students/<int:id>')
 api.add_resource(StudentCheckSession, '/student_check_session')
 api.add_resource(StudentLogin, '/studentlogin', endpoint='studentlogin')
 api.add_resource(StudentLogout, '/studentlogout', endpoint='studentlogout')
-api.add_resource(StudentCourses, '/student-courses')
+api.add_resource(StudentCourses, '/api/student-courses')
 
 
 if __name__ == "__main__":

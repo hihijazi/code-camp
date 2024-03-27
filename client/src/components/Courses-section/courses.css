@@ -1,15 +1,19 @@
-.container {
+.container1 {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start; /* Align courses from left to right */
   padding: 20px;
 }
 
+.avbghskdkd{
+  max-width: 100%;
+}
+
 .box {
-  flex: 0 0 32%;
-  max-width: 32%;
+  flex: 0 0 100%; /* Set flex basis to 100% to make each box take up the full width */
+  max-width: 30%; /* Ensure each box takes up the full width */
   box-sizing: border-box;
-  margin-bottom: 1em;
+  margin-bottom: 20px;
 }
 
 .box .content {
@@ -19,8 +23,7 @@
 }
 
 .content .item {
-  flex: 0 0 calc(33.33% - 20px); 
-  margin: 10px;
+  width: 100%; /* Ensure each item takes full width */
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
   padding: 20px; 
   box-sizing: border-box; 
@@ -57,4 +60,29 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+}
+
+
+
+.avbghskdkd {
+  margin: 0 50px; /* Add margin on both sides */
+}
+
+.course-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust as needed */
+  margin: 0 -10px; /* Compensate for the gap */
+}
+
+.course-item {
+  flex: 1 1 calc(33.33% - 20px); /* Adjust width and gap as needed */
+  margin: 0 10px; /* Compensate for the gap */
+  /* Additional styling for each course item if needed */
+}
+
+.course-image {
+  width: 300px; /* Ensure the image fills its container */
+  height: 200px; /* Set a fixed height for all images */
+  object-fit: cover; /* Maintain aspect ratio and crop if necessary */
 }
