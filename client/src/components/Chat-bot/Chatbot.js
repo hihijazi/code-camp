@@ -16,7 +16,7 @@ export default function Chatbot() {
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I am your Code Camp Support Bot!",
+      message: "Hello, I am your Retro Revival Support Bot!",
       sender: "ChatGPT",
     },
   ]);

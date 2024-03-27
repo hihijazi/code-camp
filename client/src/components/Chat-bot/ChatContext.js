@@ -4,7 +4,7 @@ const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
   const [isVisible, setIsVisible] = useState(
-    localStorage.getItem("chatVisibility") === "true"
+    localStorage.getItem("chatVisibility") === "false"
   );
   const [chatMessages, setChatMessages] = useState([]);
 
