@@ -13,6 +13,7 @@ import { ChatProvider } from "./components/Chat-bot/ChatContext";
 import StudentDashboard from './components/StudentDashboard/dashboard';
 
 
+// App.js
 const App = () => {
   return (
       <ChatProvider>
