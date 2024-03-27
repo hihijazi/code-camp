@@ -3,7 +3,6 @@ import { apiUrlBackend } from '../constants.js';
 
 export const loginInstructor = async (postData) => {
     const response = await axios.post(`${apiUrlBackend}/instructorlogin`, postData);
-  
     return response.data;
 }
 

@@ -8,7 +8,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { instructorRegister } from '../action.js';
 import _ from 'lodash';
-import { useNavigate, } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function InstructorSignup() {
@@ -31,10 +32,15 @@ function InstructorSignup() {
 
     try {
       const data = await instructorRegister(postData);
-      alert('Register successfully');
+      toast.success("Student Register successfully!");
       navigate('/instructorlogin'); // Redirect to home page
-    } catch (error) {
-      alert('Oops! Something went wrong server throws error');
+    }catch (error) {
+      console.log(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error('Oops! Something went wrong server throws error');
+      }
     }
   };
 
@@ -53,7 +59,7 @@ function InstructorSignup() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign Up
+          Instructor Sign Up
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -100,6 +106,7 @@ function InstructorSignup() {
           </Grid>
         </Box>
       </Box>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }} />
     </Container>
   );
 }

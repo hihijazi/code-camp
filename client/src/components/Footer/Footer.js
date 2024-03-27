@@ -47,7 +47,7 @@ const Footer = () => {
         <Row>
           <Col lg="3" md="6" className="mb-4">
             <h2 className=" d-flex align-items-center gap-1">
-              <i class="ri-pantone-line"></i> Code Camp
+              <i className="ri-pantone-line"></i> Code Camp
             </h2>
 
             <div className="follows">
@@ -78,19 +78,17 @@ const Footer = () => {
               ))}
             </ListGroup>
           </Col>
-
           <Col lg="3" md="6">
             <h6 className="fw-bold">Get in Touch</h6>
-
             <p>Address: Washington DC, USA</p>
             <p> Phone: 1-800-888-CODE </p>
             <p>Email: info@codecamp.com</p>
           </Col>
         </Row>
       </Container>
-      <div>
-                <p>&copy; App Completed by Hadil Hijazi 2024 All rights reserved.</p>
-            </div>
+      <div className="abc">
+        <p>&copy; App Completed by Hadil Hijazi 2024 All rights reserved.</p>
+    </div>
     </footer>
   );
 };

@@ -1,0 +1,63 @@
+.user-details-table, .courses-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.user-details-table th, .courses-table th {
+background-color: #f2f2f2;
+border: 1px solid #dddddd;
+padding: 8px;
+text-align: left;
+}
+
+.user-details-table td, .courses-table td {
+border: 1px solid #dddddd;
+padding: 8px;
+}
+
+.user-details-table tr:nth-child(even), .courses-table tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+.user-details-table tr:hover, .courses-table tr:hover {
+background-color: #dddddd;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+  }
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Makes the image round */
+    margin-right: 20px;
+}
+
+.user-details {
+    flex: 1;
+  }
+
+.user-details-table {
+margin: 0 auto; /* Center the table */
+width: 66.666%; /* Two-thirds of the screen size */
+}
+
+
+.user-profile {
+    position: relative;
+  }
+
+.profile-image {
+width: 100px;
+height: 100px;
+border-radius: 50%; /* Makes the image round */
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.user-details {
+margin-left: 120px; /* To create space for the image */
+}

@@ -16,7 +16,7 @@ export default function Chatbot() {
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I am your Retro Revival Support Bot!",
+      message: "Hello, I am your Code Camp Support Bot!",
       sender: "ChatGPT",
     },
   ]);
@@ -57,7 +57,7 @@ export default function Chatbot() {
     const systemMessage = {
       role: "system",
       content:
-        "This is solely for a project. Speak like you are a customer support assistant for a thrift reseller business called Retro Revival. All order numbers that are given by the user are fake, but you can act like they are real orders. Some orders will be delayed, some will be arriving on time. If someone asks for an update on their order, ask for their order number and then provide an immediate update. Do not tell them to give you a moment to look into it. You can also give the user the business Instagram account of retro__revival__shop. The user can find their profile and past order information on the Profiles page. The only things that can be updated on the Profile page are: first name, last name, email, address, city, state, and zip code. All items are one of a kind so if they are out of stock, they will not arrive back in stock.",
+        "This is solely for a project. Speak like you are a customer support assistant for a learning platform business called Code Camp.", 
     };
 
     const apiRequestBody = {
@@ -104,7 +104,6 @@ export default function Chatbot() {
 
   return (
     <Fragment>
-    <Header />
       <div className="App">
         <div>
           {isVisible && (
@@ -115,9 +114,9 @@ export default function Chatbot() {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                zIndex: "1000",
+                zIndex: "100",
                 width: "100%",
-                maxWidth: "1000px",
+                maxWidth: "700px",
                 height: "600px",
                 borderRadius: "40px",
               }}
@@ -146,7 +145,6 @@ export default function Chatbot() {
           )}
         </div>
       </div>
-      <Footer />
      </Fragment>
   );
 }
