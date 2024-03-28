@@ -84,6 +84,7 @@ const StudentDashboard = ({ loggedInUser }) => {
     .then(response => {
       if (response.ok) {
         console.log("User details updated successfully");
+        window.location.reload();
         // You may want to update the local state with the updated details here
       } else {
         console.error("Failed to update user details:", response.statusText);
@@ -97,15 +98,9 @@ const StudentDashboard = ({ loggedInUser }) => {
     // For simplicity, let's just update the name of the user
     const newName = prompt("Enter new name:");
     if (newName) {
-      const updatedUserDetails = { ...userDetails, name: newName };
-      updateUserDetail(updatedUserDetails);
-      // Update local state with the updated user details
-      setUserDetails(updatedUserDetails);
+      updateUserDetail({ ...userDetails, name: newName });
     }
   };
-  
-  
-  
 
   return (
     <Fragment>

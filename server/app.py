@@ -190,7 +190,7 @@ class Enrollments(Resource):
 
 ############### Instructor #################
 
-class InstructorDashboard(Resource):
+class AssignInstructor(Resource):
     @jwt_required()
     def get(self):
         logged_in_user_id = get_jwt_identity()
@@ -332,7 +332,7 @@ class MarkAttendance(Resource):
 
 
 api.add_resource(MarkAttendance, '/api/mark-attendence')
-api.add_resource(InstructorDashboard, '/api/instructor-dashboard/')
+api.add_resource(AssignInstructor, '/api/assign-instructor/')
 api.add_resource(Instructors, '/instructors')
 api.add_resource(InstructorsById, '/instructors/<int:id>')
 api.add_resource(InstructorCheckSession, '/instructor_check_session')
@@ -415,8 +415,8 @@ class StudentsById(Resource):
                 if 'password' in data:
                     user.password_hash = data['password']
                     del data['password']
-                # for attr in data:
-                #     setattr(user, attr, data[attr])
+                for attr in data:
+                    setattr(user, attr, data[attr])
                 db.session.commit()
                 return make_response(user.to_dict(only=('name', 'username')), 202)
             except Exception as e:
