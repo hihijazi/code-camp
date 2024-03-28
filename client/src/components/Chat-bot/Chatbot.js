@@ -119,6 +119,7 @@ export default function Chatbot() {
 
   return (
     <Fragment>
+      <Header />
       <div className="App">
   <div>
     <div
