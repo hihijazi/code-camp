@@ -1,6 +1,6 @@
 import { useState, Fragment } from "react";
 import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+
 import { useChat } from "./ChatContext";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {

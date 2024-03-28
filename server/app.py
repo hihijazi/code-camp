@@ -115,10 +115,10 @@ class CoursesById(Resource):
             db.session.commit()
             return make_response({}, 204)
         return make_response({
-            'error': 'No course found'
+            'error': 'Course not deleted'
         }, 404)
 
-api.add_resource(CoursesById, '/api/courses/<int:id>')
+api.add_resource(CoursesById, '/courses/<int:id>')
 
 
 class Lessons(Resource):
@@ -223,7 +223,7 @@ class AssignInstructor(Resource):
                 return make_response(course.to_dict(), 200)
             except ValueError as e:
                 return make_response({'error': str(e)}, 404)
-
+            
 
 class Instructors(Resource):
     def get(self):
@@ -299,7 +299,7 @@ class InstructorsById(Resource):
             db.session.commit()
             return make_response({}, 204)
         return make_response({'error': 'User not found'}, 404)
-
+    
 
 class InstructorCheckSession(Resource):
     def get(self):
@@ -308,7 +308,7 @@ class InstructorCheckSession(Resource):
             return instructor.to_dict(only=('id', 'name', 'username'))
         else:
             return {'message': '401: Not Authorized'}, 401
-        
+
 
 class MarkAttendance(Resource):
     def get(self, id):
