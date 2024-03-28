@@ -8,12 +8,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { loginStudent } from '../action.js';
 import _ from 'lodash';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function StudentLogin() {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -31,10 +32,9 @@ function StudentLogin() {
       const data = await loginStudent(postData);
       const serializedData = JSON.stringify(data);
       localStorage.setItem("user", serializedData);
-       toast.success("Login successfully!");
-      navigate('/student-dashboard'); // Redirect to home page
-      window.location.reload(); // Reload the app
-    }catch (error) {
+      toast.success("Login successfully!");
+      navigate('/student-dashboard'); // Redirect to student dashboard
+    } catch (error) {
       console.log(error);
       if (error.response && error.response.data && error.response.data.error) {
         toast.error(error.response.data.error);
@@ -97,9 +97,8 @@ function StudentLogin() {
           </Grid>
         </Box>
       </Box>
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }} />
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }} />
     </Container>
-
   );
 }
 

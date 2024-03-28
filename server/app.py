@@ -115,10 +115,10 @@ class CoursesById(Resource):
             db.session.commit()
             return make_response({}, 204)
         return make_response({
-            'error': 'Course not deleted'
+            'error': 'No course found'
         }, 404)
 
-api.add_resource(CoursesById, '/courses/<int:id>')
+api.add_resource(CoursesById, '/api/courses/<int:id>')
 
 
 class Lessons(Resource):
@@ -189,6 +189,40 @@ class Enrollments(Resource):
 
 
 ############### Instructor #################
+
+class InstructorDashboard(Resource):
+    @jwt_required()
+    def get(self):
+        logged_in_user_id = get_jwt_identity()
+        courses = []
+        for course in Course.get_courses_by_instructor_id(logged_in_user_id):
+            course_dict = course.to_dict()
+            course_dict['enrollments'] = list()
+            student_names = set()
+            for enrollment in Enrollment.query.filter(Enrollment.course_id==course.id).all():
+                student_names.add((enrollment.student.id, enrollment.student.name, enrollment.student.username))
+            course_dict['enrollments'].append(list(student_names))
+            courses.append(course_dict)
+        if courses:
+            return make_response({"data":courses}, 200)
+        else:
+            return make_response({'error': 'No course found'}, 404)
+
+    def patch(self):
+        data = request.get_json()
+        instructor_id = data.get('instructor_id')
+        course_id = data.get('course_id')
+        instructor = Instructor.query.filter(Instructor.id == instructor_id).first() 
+        course = Course.query.filter(Course.id == course_id).first()
+        if not (course and instructor):
+            return make_response({'error': 'Invalid course and instructor id'}, 404)
+        else:
+            try:
+                setattr(course, 'instructor_id', instructor_id)
+                db.session.commit()
+                return make_response(course.to_dict(), 200)
+            except ValueError as e:
+                return make_response({'error': str(e)}, 404)
 
 
 class Instructors(Resource):
@@ -274,9 +308,31 @@ class InstructorCheckSession(Resource):
             return instructor.to_dict(only=('id', 'name', 'username'))
         else:
             return {'message': '401: Not Authorized'}, 401
+        
+
+class MarkAttendance(Resource):
+    def get(self, id):
+        user = Instructor.query.filter(Instructor.id == id).first()
+        if user:
+            return make_response(user.to_dict(only=('name', 'username')), 200)
+        return make_response({'error': 'user not found'}, 404)
+
+    def patch(self):
+        user = Instructor.query.filter(Instructor.id == id).first()
+        if user:
+            try:
+                data = request.get_json()
+                for attr in data:
+                    setattr(user, attr, data[attr])
+                db.session.commit()
+                return make_response(user.to_dict(only=('name', 'username')), 202)
+            except ValueError:
+                return make_response({'error': 'Failed to edit user'}, 400)
 
 
 
+api.add_resource(MarkAttendance, '/api/mark-attendence')
+api.add_resource(InstructorDashboard, '/api/instructor-dashboard/')
 api.add_resource(Instructors, '/instructors')
 api.add_resource(InstructorsById, '/instructors/<int:id>')
 api.add_resource(InstructorCheckSession, '/instructor_check_session')
@@ -332,8 +388,9 @@ class StudentLogin(Resource):
 
 class StudentsById(Resource):
     # get student details
+    @jwt_required()
     def get(self, id):
-        logged_in_user_id = session.get('user_id')
+        logged_in_user_id = get_jwt_identity()
         print("logged_in_user_id ===========", logged_in_user_id)
         if logged_in_user_id != id:
             return make_response({'error': 'Unauthorized access'}, 401)

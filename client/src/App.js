@@ -8,9 +8,9 @@ import InstructorLogin from './components/InstructorDashboard/InstructorLogin';
 import StudentLogin from './components/StudentDashboard/StudentLogin'; 
 import InstructortLogin from './components/InstructorDashboard/InstructorSignup'; 
 import StudentSignup from './components/StudentDashboard/StudentSignup.js';
-import InstructorDashboard from './components/InstructorDashboard/home';
+import InstructorDashboard from './components/InstructorDashboard/InstructorDashboard';
 import { ChatProvider } from "./components/Chat-bot/ChatContext";
-import StudentDashboard from './components/StudentDashboard/dashboard';
+import StudentDashboard from './components/StudentDashboard/StudentDashboard';
 
 
 // App.js

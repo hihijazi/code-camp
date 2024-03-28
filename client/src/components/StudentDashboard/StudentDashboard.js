@@ -97,9 +97,15 @@ const StudentDashboard = ({ loggedInUser }) => {
     // For simplicity, let's just update the name of the user
     const newName = prompt("Enter new name:");
     if (newName) {
-      updateUserDetail({ ...userDetails, name: newName });
+      const updatedUserDetails = { ...userDetails, name: newName };
+      updateUserDetail(updatedUserDetails);
+      // Update local state with the updated user details
+      setUserDetails(updatedUserDetails);
     }
   };
+  
+  
+  
 
   return (
     <Fragment>

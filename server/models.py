@@ -51,40 +51,40 @@ class Student(db.Model, SerializerMixin):
         return f'<Student {self.id}: {self.name} >'
 
 
-class Course(db.Model, SerializerMixin):
-    __tablename__ = 'courses'
+# class Course(db.Model, SerializerMixin):
+#     __tablename__ = 'courses'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    price = db.Column(db.Integer)
-    description = db.Column(db.String)
-    image = db.Column(db.String)
-    instructor_id = db.Column(db.Integer, ForeignKey('instructors.id'))
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String)
+#     price = db.Column(db.Integer)
+#     description = db.Column(db.String)
+#     image = db.Column(db.String)
+#     instructor_id = db.Column(db.Integer, ForeignKey('instructors.id'))
 
-    # Add relationship 
+#     # Add relationship 
 
-    instructor = relationship("Instructor", back_populates="courses")
-    enrollments = relationship('Enrollment', back_populates='course')
+#     instructor = relationship("Instructor", back_populates="courses")
+#     enrollments = relationship('Enrollment', back_populates='course')
     
-    # Add serialization rules
-    serialize_rules = ('-students', '-instructor')
+#     # Add serialization rules
+#     serialize_rules = ('-students', '-instructor')
 
-    @staticmethod
-    def get_all_courses():
-        return Course.query.all()
+#     @staticmethod
+#     def get_all_courses():
+#         return Course.query.all()
 
-    @staticmethod
-    def get_courses_by_instructor_id(instructor_id):
-        return Course.query.filter_by(instructor_id=instructor_id).all()
+#     @staticmethod
+#     def get_courses_by_instructor_id(instructor_id):
+#         return Course.query.filter_by(instructor_id=instructor_id).all()
 
-    @staticmethod
-    def get_courses_by_student_id(student_id):
-        return Course.query.join(Enrollment).filter(Enrollment.student_id == student_id).all()
+#     @staticmethod
+#     def get_courses_by_student_id(student_id):
+#         return Course.query.join(Enrollment).filter(Enrollment.student_id == student_id).all()
 
-    # Add validations
+#     # Add validations
 
-    def __repr__(self):
-        return f'<Course {self.id}: {self.name}: {self.price}>'
+#     def __repr__(self):
+#         return f'<Course {self.id}: {self.name}: {self.price}>'
 
 
 class Instructor(db.Model, SerializerMixin):
@@ -155,9 +155,42 @@ class Lesson(db.Model, SerializerMixin):
         
     def __repr__(self):
         return f'<Lesson {self.id}:  {self.title}>'
-    
 
-class Enrollment(db.Model):
+
+class Course(db.Model, SerializerMixin):
+    __tablename__ = 'courses'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    price = db.Column(db.Integer)
+    description = db.Column(db.String)
+    image = db.Column(db.String)
+    instructor_id = db.Column(db.Integer, ForeignKey('instructors.id'))
+
+    # Add relationship 
+    instructor = relationship("Instructor", back_populates="courses")
+
+    # Add serialization rules
+    serialize_rules = ('id', 'name', 'price', 'description', 'image')
+
+    @staticmethod
+    def get_all_courses():
+        return Course.query.all()
+
+    @staticmethod
+    def get_courses_by_instructor_id(instructor_id):
+        return Course.query.filter_by(instructor_id=instructor_id).all()
+
+    @staticmethod
+    def get_courses_by_student_id(student_id):
+        return Course.query.join(Enrollment).filter(Enrollment.student_id == student_id).all()
+
+    # Add validations
+
+    def __repr__(self):
+        return f'<Course {self.id}: {self.name}: {self.price}>'
+
+class Enrollment(db.Model, SerializerMixin):
     __tablename__ = 'enrollments'
 
     id = db.Column(db.Integer, primary_key=True) 
@@ -168,18 +201,35 @@ class Enrollment(db.Model):
 
     # Define relationship with Course
     student = relationship("Student", back_populates="enrollments")
-    course = relationship("Course", back_populates="enrollments")
+    # Don't include course relationship to avoid circular reference
 
+    # Add serialization rules
+    serialize_rules = ('id', 'name', 'description', 'course_id', 'student_id')
 
-    def __repr__(self):
-        return f'<Enrollment {self.id}: Student {self.student_id} enrolled in Course {self.course_id}>'
-    
+    # def __repr__(self):
+    #     return f'<Enrollment {self.id}: Student {self.student_id} enrolled in Course {self.course_id}>'
+
     def to_dict(self):
+        # Serialize course information manually
+        course_info = {
+            'id': self.course_id
+        }
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description,
-            'course_id': self.course_id,
+            'course': course_info,
             'student_id': self.student_id,
         }
-        
+
+
+class Attendance(db.Model, SerializerMixin):
+    __tablename__ = 'attendance'
+
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, ForeignKey('courses.id'), nullable=False)
+    student_id = db.Column(db.Integer, ForeignKey('students.id'))
+    is_present = db.Column(db.Boolean)  # Corrected attribute name
+
+    def __repr__(self):
+        return f'<Attendance course_id={self.course_id}, student_id={self.student_id}, is_present={self.is_present}>'
