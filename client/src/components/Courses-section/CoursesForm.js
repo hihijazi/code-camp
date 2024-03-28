@@ -9,7 +9,7 @@ function CoursesForm({ courseId, onAddCourse }) {
   const [courses, setCourses] = useState([]);
   const [courseName, setCourseName] = useState('');
   const [price, setPrice] = useState('');
-  const [enrolledCourses, setEnrolledCourses] = useState(new Set()); // Track enrolled courses
+  const [enrolledCourses, setEnrolledCourses] = useState(new Set()); 
   const [formErrors, setFormErrors] = useState({}); 
   const navigate = useNavigate();
   const user_data = JSON.parse(localStorage.getItem('user'));
@@ -40,7 +40,7 @@ function CoursesForm({ courseId, onAddCourse }) {
         toast.success("You have successfully enrolled for this course.");
         navigate('/student-dashboard');
         window.location.reload();
-        setEnrolledCourses(prevEnrolledCourses => new Set([...prevEnrolledCourses, courseId])); // Update enrolled courses
+        setEnrolledCourses(prevEnrolledCourses => new Set([...prevEnrolledCourses, courseId])); 
       } else {
         console.error("Failed to enroll student:", response.statusText);
         toast.error(response.statusText);
@@ -54,7 +54,7 @@ function CoursesForm({ courseId, onAddCourse }) {
   }
 
   function handleDelete(courseId) {
-    fetch(`/courses/${courseId}`, {  // Use template literals to construct the URL
+    fetch(`/courses/${courseId}`, {  
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${accessToken}`
@@ -63,7 +63,7 @@ function CoursesForm({ courseId, onAddCourse }) {
     .then(response => {
       if (response.ok) {
         toast.success("Course deleted successfully.");
-        // Assuming you want to remove the course from the UI after deletion
+
         setCourses(prevCourses => prevCourses.filter(course => course.id !== courseId));
       } else {
         console.error("Failed to delete course:", response.statusText);
@@ -96,7 +96,7 @@ function CoursesForm({ courseId, onAddCourse }) {
                           <p>{course.description}</p> 
                           <p>{course.price}</p> 
                           {isEnrolled(course.id) ? (
-                            <button disabled>Enrolled</button> // Disable button if already enrolled
+                            <button disabled>Enrolled</button> 
                           ) : (
                             <button onClick={() => handleEnroll(course.id)}>{isEnrolled(course.id) ? 'Enrolled' : 'Enroll'}</button>
                           )}
