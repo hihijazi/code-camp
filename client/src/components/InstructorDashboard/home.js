@@ -3,9 +3,9 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
 const InstructorDashboard = () => {
+  const [userDetails, setUserDetails] = useState([]);
   const [presentStudents, setPresentStudents] = useState([]);
   const [absentStudents, setAbsentStudents] = useState([]);
-  const [userDetails, setUserDetails] = useState({ name: '', username: '' });
 
   const instructors = [
     { id: 1, name: 'John Doe', email: 'john@example.com' },

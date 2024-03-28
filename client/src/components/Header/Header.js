@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import "./header.css";
 
 const Header = () => {
-  const { isVisible, toggleVisibility } = true;
+  //const { isVisible, toggleVisibility } = true;
   const menuRef = useRef();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isStudent, setIsStudent] = useState(false);
   const user_data = localStorage.getItem('user');
   const userDataObject = JSON.parse(user_data);
-  const navigate = useNavigate(); // Access navigate function
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const userIsLoggedIn = checkUserLoginStatus();
@@ -25,8 +25,8 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
-    navigate('/'); // Redirect to home page
-    window.location.reload(); // Reload the app
+    navigate('/'); 
+    window.location.reload(); 
   };
 
   const navLinks = [
@@ -109,7 +109,7 @@ const Header = () => {
                 {filteredLinks.map((item, index) => (
                   <li key={index} className="nav__item">
                     {item.logout ? (
-                      <a href="#" onClick={(event) => handleClick(event, item.onClick)}>{item.display}</a>
+                      <a href="/" onClick={(event) => handleClick(event, item.onClick)}>{item.display}</a>
                     ) : (
                       <a href={item.url}>{item.display}</a>
                     )}

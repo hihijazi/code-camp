@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./pages/Home";
 import CoursesForm from './components/Courses-section/CoursesForm';
-import ChatBot from './components/Chat-bot/Chatbot'; 
+import Chatbot from './components/Chat-bot/Chatbot'; 
 import InstructorLogin from './components/InstructorDashboard/InstructorLogin';
 import StudentLogin from './components/StudentDashboard/StudentLogin'; 
 import InstructortLogin from './components/InstructorDashboard/InstructorSignup'; 
@@ -22,7 +22,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<CoursesForm />} />
-            <Route path="/chat-bot" element={<ChatBot />} />   
+            <Route path="/chat-bot" element={<Chatbot />} />   
             <Route path="/instructorlogin" element={<InstructorLogin />} />
             <Route path="/studentlogin" element={<StudentLogin />} />
             <Route path="/student-signup" element={<StudentSignup />} />
@@ -36,4 +36,4 @@ const App = () => {
   );
 }
 
-export default App
+export default App;

@@ -69,6 +69,12 @@ courses_data = [
         "image": "images/ccc.png",
         "description": "C++ is a powerful and versatile programming language renowned for its performance and flexibility, and our course provides comprehensive instruction on its syntax, features, and object-oriented programming principles to empower you in building efficient and scalable software applications.",
         "price": "$600.00",
+    },
+    {
+        "name": "C++234",
+        "image": "images/ccc.png",
+        "description": "C++ is a powerful and versatile programming language renowned for its performance and flexibility, and our course provides comprehensive instruction on its syntax, features, and object-oriented programming principles to empower you in building efficient and scalable software applications.",
+        "price": "$6000.00",
     }
 ]
 

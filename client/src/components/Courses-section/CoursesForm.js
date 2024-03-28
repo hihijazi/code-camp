@@ -50,8 +50,31 @@ function CoursesForm({ courseId, onAddCourse }) {
   }
 
   function isEnrolled(courseId) {
-    return enrolledCourses.has(courseId); // Check if the course is enrolled
+    return enrolledCourses.has(courseId); 
   }
+
+  function handleDelete(courseId) {
+    fetch(`/courses/${courseId}`, {  // Use template literals to construct the URL
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+    })
+    .then(response => {
+      if (response.ok) {
+        toast.success("Course deleted successfully.");
+        // Assuming you want to remove the course from the UI after deletion
+        setCourses(prevCourses => prevCourses.filter(course => course.id !== courseId));
+      } else {
+        console.error("Failed to delete course:", response.statusText);
+        toast.error(response.statusText);
+      }
+    })
+    .catch(error => console.error("Error deleting course:", error));
+  }
+  
+  
+  
   
   return (
     <Fragment>
@@ -77,6 +100,8 @@ function CoursesForm({ courseId, onAddCourse }) {
                           ) : (
                             <button onClick={() => handleEnroll(course.id)}>{isEnrolled(course.id) ? 'Enrolled' : 'Enroll'}</button>
                           )}
+
+                          <button onClick={() => handleDelete(course.id)}>Delete</button>
                         </div>
                       </div>
                     </div>

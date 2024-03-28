@@ -115,7 +115,7 @@ class CoursesById(Resource):
             db.session.commit()
             return make_response({}, 204)
         return make_response({
-            'error': 'No course found'
+            'error': 'Course not deleted'
         }, 404)
 
 api.add_resource(CoursesById, '/courses/<int:id>')
